@@ -1,8 +1,10 @@
-import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Input } from "./Input";
-import { Button } from "../shared/Button";
+import { useAuth } from "../hooks/auth/useAuth";
+
+import { Input } from "../components/form/Input";
+import { Button } from "../components/shared/Button";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -13,13 +15,27 @@ export const Login = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard/recipes", { replace: true });
+    }
+  }, []);
+
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
 
-  const loginUser = (e) => {
-    alert("login");
+  const { user, login } = useAuth();
+
+  const handleSubmit = () => {
+    login({
+      username: username,
+      password: password,
+    });
   };
+
   return (
     <form
       onSubmit={(e) => {
@@ -42,9 +58,7 @@ export const Login = () => {
         ref={passwordRef}
         isValidInput={isValidPassword}
       />
-      <Button label="Login" action={() => loginUser()} />
+      <Button label="Login" action={() => handleSubmit()} />
     </form>
   );
 };
-
-Login.propTypes = {};

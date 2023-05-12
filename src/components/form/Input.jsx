@@ -23,7 +23,7 @@ Input.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string,
   value: PropTypes.string,
-  setValue: PropTypes.function,
+  setValue: PropTypes.func,
   ref: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.any }),
