@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/auth/useAuth";
 
 import { Input } from "../components/form/Input";
 import { Button } from "../components/shared/Button";
+import { USERNAME_REGEX, PASSWORD_REGEX } from "../constants";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -17,9 +18,6 @@ export const Login = () => {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [usernameMessage, setUsernameMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
-
-  const usernameRegex = new RegExp("^[a-zA-Z].[a-zA-Z]+@[a-zA-Z]+.[a-zA-Z]+$");
-  const passwordRegex = new RegExp("^(?=.*[A-Z])(?=.*d)(?=.*[^ws]).{8,}$");
 
   const navigate = useNavigate();
 
@@ -38,7 +36,7 @@ export const Login = () => {
   const handleSubmit = () => {
     if (!username) {
       setUsernameMessage("Field is required.");
-    } else if (!usernameRegex.test(username)) {
+    } else if (!USERNAME_REGEX.test(username)) {
       setUsernameMessage(
         "Invalid format. Format should be: first letter of name, @, last name of employee."
       );
@@ -51,7 +49,7 @@ export const Login = () => {
 
     if (!password) {
       setPasswordMessage("Field is required.");
-    } else if (!passwordRegex.test(password)) {
+    } else if (!PASSWORD_REGEX.test(password)) {
       setPasswordMessage(
         "Invalid format. Password should be at least 8 characters long with at least one uppercase letter, number, and special character."
       );
