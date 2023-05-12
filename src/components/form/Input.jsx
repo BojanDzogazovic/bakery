@@ -2,11 +2,22 @@ import PropTypes from "prop-types";
 import { forwardRef } from "react";
 
 export const Input = forwardRef(function Input(props, ref) {
-  const { label, id, value, setValue, isValidInput, validationMessage } = props;
+  const {
+    label,
+    id,
+    classes,
+    value,
+    setValue,
+    isValidInput,
+    validationMessage,
+  } = props;
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
+    <div className={classes}>
+      <label className="input__label" htmlFor={id}>
+        {label}
+      </label>
       <input
+        className="input__field"
         type="text"
         id={id}
         autoComplete="off"
@@ -14,14 +25,15 @@ export const Input = forwardRef(function Input(props, ref) {
         onChange={(e) => setValue(e.target.value)}
         ref={ref}
       />
-      {!isValidInput && value && <p>{validationMessage}</p>}
-    </>
+      {!isValidInput && <p className="input__message">{validationMessage}</p>}
+    </div>
   );
 });
 
 Input.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string,
+  classes: PropTypes.string,
   value: PropTypes.string,
   setValue: PropTypes.func,
   ref: PropTypes.oneOfType([

@@ -1,0 +1,33 @@
+.button {
+  margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 18px;
+  font-weight: 700;
+
+  &__login {
+    background-color: $primary_color;
+    border: 3px solid $primary_color;
+    color: #fff;
+
+    &:hover {
+      background-color: #fff;
+      color: $primary_color;
+    }
+  }
+
+  &__logout {
+    background-color: #fff;
+    color: $primary_color;
+    border: 3px solid $primary_color;
+
+    &:hover {
+      background-color: $primary_color;
+
+      color: #fff;
+    }
+  }
+}

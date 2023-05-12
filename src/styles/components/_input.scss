@@ -1,0 +1,32 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  &__label {
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 2.5px;
+  }
+
+  &__field {
+    font-size: 18px;
+    padding: 2.5px;
+    border: 1px solid $secondary_color;
+    border-radius: 5px;
+    color: $info_color;
+    font-weight: 400;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__message {
+    width: 250px;
+    font-size: 13px;
+    font-weight: 900;
+    margin: 5px 0;
+    color: $info_color;
+  }
+}

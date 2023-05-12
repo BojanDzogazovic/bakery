@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap");
+
+$primary_color: rgb(198, 156, 108);
+$primary_color_opacity: rgb(198, 156, 108, 0.5);
+$secondary_color: rgb(189, 183, 171);
+$info_color: rgb(52, 57, 87);
+
+@import "./components/_button";
+@import "./components/_input";
+@import "./components/_login";
+@import "./components/_navigation";
+@import "./components/_dashboard";
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background: url(../assets/images/bakery_background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: $info_color;
+}

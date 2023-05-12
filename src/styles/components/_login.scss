@@ -1,0 +1,36 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $primary_color_opacity;
+    padding: 35px;
+    border-radius: 15px;
+    width: 75%;
+    margin: auto;
+
+    @media (min-width: 640px) {
+      width: auto;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    font-weight: 900;
+  }
+
+  &__logo {
+    width: 100%;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
