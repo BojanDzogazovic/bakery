@@ -2,7 +2,7 @@ import { useNavigate, useOutlet, useLocation, Link } from "react-router-dom";
 
 import { useAuth } from "../hooks/auth/useAuth";
 
-import { Button } from "../components/shared/Button";
+import { Button } from "./shared/Button";
 
 export const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -41,7 +41,7 @@ export const Dashboard = () => {
         </div>
         <Button
           classes="button button__logout"
-          label="Logout"
+          content="Logout"
           action={() => logout()}
         />
       </nav>

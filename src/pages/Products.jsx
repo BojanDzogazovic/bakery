@@ -1,4 +1,4 @@
-import { ProductsContent } from "./ProductsContent";
+import { ProductsContent } from "../components/products/ProductsContent";
 
 export const Products = () => {
   return (

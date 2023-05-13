@@ -8,7 +8,7 @@ import {
 import { Login } from "./pages/Login";
 import { Recipes } from "./pages/Recipes";
 import { Products } from "./pages/Products";
-import { Dashboard } from "./pages/Dashboard";
+import { Dashboard } from "./components/Dashboard";
 
 const queryClient = new QueryClient();
 

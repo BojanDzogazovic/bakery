@@ -1,15 +1,18 @@
 import PropTypes from "prop-types";
 
-export const Button = ({ label, classes, action }) => {
+export const Button = ({ content, classes, action }) => {
   return (
     <button className={classes} onClick={action}>
-      {label}
+      {content}
     </button>
   );
 };
 
 Button.propTypes = {
-  label: PropTypes.string,
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({ current: PropTypes.any }),
+  ]),
   classes: PropTypes.string,
   action: PropTypes.func,
 };

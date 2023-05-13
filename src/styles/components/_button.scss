@@ -30,4 +30,15 @@
       color: #fff;
     }
   }
+
+  &__edit,
+  &__delete,
+  &__add {
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    margin: 0 5px;
+    padding: 0;
+  }
 }

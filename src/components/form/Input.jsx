@@ -10,6 +10,7 @@ export const Input = forwardRef(function Input(props, ref) {
     setValue,
     isValidInput,
     validationMessage,
+    placeholder,
   } = props;
   return (
     <div className={classes}>
@@ -22,8 +23,13 @@ export const Input = forwardRef(function Input(props, ref) {
         id={id}
         autoComplete="off"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => {
+          if (setValue) {
+            setValue(e.target.value);
+          }
+        }}
         ref={ref}
+        placeholder={placeholder}
       />
       {!isValidInput && <p className="input__message">{validationMessage}</p>}
     </div>
@@ -42,4 +48,5 @@ Input.propTypes = {
   ]),
   isValidInput: PropTypes.bool,
   validationMessage: PropTypes.string,
+  placeholder: PropTypes.string,
 };

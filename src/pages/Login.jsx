@@ -104,7 +104,7 @@ export const Login = () => {
           />
           <Button
             classes="button button__login"
-            label="Login"
+            content="Login"
             action={() => handleSubmit()}
           />
         </form>{" "}
