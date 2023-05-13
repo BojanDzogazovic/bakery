@@ -11,7 +11,7 @@
 
   &__field {
     font-size: 18px;
-    padding: 2.5px;
+    padding: 5px;
     border: 1px solid $secondary_color;
     border-radius: 5px;
     color: $info_color;
@@ -28,5 +28,12 @@
     font-weight: 900;
     margin: 5px 0;
     color: $info_color;
+  }
+
+  &__select {
+    height: 30px;
+    border: 1px solid $secondary_color;
+    border-radius: 5px;
+    outline: none;
   }
 }

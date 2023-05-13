@@ -57,6 +57,31 @@
       border-radius: 10px;
       align-items: center;
       margin-bottom: 25px;
+      padding-bottom: 25px;
+      position: relative;
+    }
+
+    &-message {
+      font-weight: 900;
+      font-size: 12px;
+      color: $info_color;
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+
+      @media (min-width: 900px) {
+        bottom: -5px;
+        left: 55px;
+      }
+    }
+
+    &-select {
+      width: 212px;
+      box-sizing: border-box;
+
+      @media (min-width: 900px) {
+        width: 110px;
+      }
     }
 
     &-input {

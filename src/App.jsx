@@ -1,9 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import {
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { Login } from "./pages/Login";
 import { Recipes } from "./pages/Recipes";
