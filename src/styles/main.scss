@@ -3,6 +3,7 @@
 $primary_color: rgb(198, 156, 108);
 $primary_color_opacity: rgb(198, 156, 108, 0.5);
 $secondary_color: rgb(189, 183, 171);
+$secondary_color_opacity: rgb(189, 183, 171, 0.5);
 $info_color: rgb(52, 57, 87);
 
 @import "./components/_button";
@@ -10,6 +11,8 @@ $info_color: rgb(52, 57, 87);
 @import "./components/_login";
 @import "./components/_navigation";
 @import "./components/_dashboard";
+@import "./components/_loader";
+@import "./components/_error";
 
 * {
   font-family: "Inter", sans-serif;

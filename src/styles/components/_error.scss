@@ -1,0 +1,15 @@
+.error {
+  background-color: $secondary_color_opacity;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+
+  &__icon {
+    width: 96px;
+  }
+}

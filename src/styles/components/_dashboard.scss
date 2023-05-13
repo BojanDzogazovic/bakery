@@ -4,7 +4,12 @@
   justify-content: center;
   flex-direction: column;
 
-  &__content {
+  &__content,
+  &__content--products,
+  &__content--recipes {
     margin: 25px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
