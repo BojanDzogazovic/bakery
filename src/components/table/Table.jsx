@@ -1,7 +1,17 @@
 import PropTypes from "prop-types";
 import { Row } from "./Row";
 
-export const Table = ({ classes, data }) => {
+export const Table = ({
+  classes,
+  data,
+  setName,
+  setPrice,
+  setImage,
+  setRecipeID,
+  setActive,
+  setID,
+  setEditMode,
+}) => {
   return (
     <div style={{ overflowX: "auto" }}>
       <div className="table__hint">
@@ -26,7 +36,17 @@ export const Table = ({ classes, data }) => {
         </thead>
         <tbody>
           {data?.map((d) => (
-            <Row key={d.id} data={d} />
+            <Row
+              key={d.id}
+              data={d}
+              setName={setName}
+              setPrice={setPrice}
+              setImage={setImage}
+              setRecipeID={setRecipeID}
+              setActive={setActive}
+              setID={setID}
+              setEditMode={setEditMode}
+            />
           ))}
         </tbody>
       </table>
@@ -37,4 +57,11 @@ export const Table = ({ classes, data }) => {
 Table.propTypes = {
   classes: PropTypes.string,
   data: PropTypes.array,
+  setName: PropTypes.func,
+  setPrice: PropTypes.func,
+  setImage: PropTypes.func,
+  setRecipeID: PropTypes.func,
+  setActive: PropTypes.func,
+  setID: PropTypes.func,
+  setEditMode: PropTypes.func,
 };

@@ -3,11 +3,27 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { addData } from "../../actions/addData";
+import { editData } from "../../actions/editData";
 
 import { Input } from "../form/Input";
 import { Button } from "../shared/Button";
 
-export const AddProduct = ({ nextID }) => {
+export const AddProduct = ({
+  name,
+  price,
+  image,
+  recipeID,
+  active,
+  id,
+  setID,
+  setName,
+  setPrice,
+  setImage,
+  setRecipeID,
+  setActive,
+  editMode,
+  setEditMode,
+}) => {
   const queryClient = useQueryClient();
 
   const addProduct = useMutation({
@@ -19,11 +35,14 @@ export const AddProduct = ({ nextID }) => {
     },
   });
 
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [recipeID, setRecipeID] = useState("");
-  const [active, setActive] = useState(true);
+  const editProduct = useMutation({
+    mutationFn: (data) =>
+      editData(`${import.meta.env.VITE_BASE_URL}/products/${id}`, data),
+    onSuccess: (data) => {
+      queryClient.setQueryData(["products", id], data);
+      queryClient.invalidateQueries(["products"], { exact: true });
+    },
+  });
 
   const [missingInputs, setMissingInputs] = useState(false);
 
@@ -41,15 +60,41 @@ export const AddProduct = ({ nextID }) => {
         image: image,
         recipe_id: recipeID,
         active: active,
-        id: nextID,
+        id: id,
       };
       addProduct.mutate({ ...newProduct });
-      setName("");
-      setPrice("");
-      setImage("");
-      setRecipeID("");
-      setActive(true);
+      resetInputs();
     }
+  };
+
+  const saveItem = async () => {
+    if (!name || !price || !image || !recipeID) {
+      setMissingInputs(true);
+
+      setTimeout(() => {
+        setMissingInputs(false);
+      }, 3000);
+    } else {
+      const newProduct = {
+        name: name,
+        price: price,
+        image: image,
+        recipe_id: recipeID,
+        active: active,
+        id: id,
+      };
+      editProduct.mutate({ ...newProduct });
+      resetInputs();
+    }
+  };
+
+  const resetInputs = () => {
+    setEditMode(false);
+    setName("");
+    setPrice("");
+    setImage("");
+    setRecipeID("");
+    setActive(true);
   };
 
   return (
@@ -61,7 +106,7 @@ export const AddProduct = ({ nextID }) => {
         }}
         className="table__wrapper"
       >
-        <Input readonly value={nextID} classes="table__add-input" />
+        <Input readonly value={id} classes="table__add-input" />
         <Input
           value={name}
           setValue={setName}
@@ -94,21 +139,50 @@ export const AddProduct = ({ nextID }) => {
           <option value={true}>Active</option>
           <option value={false}>Inactive</option>
         </select>
-
-        <Button
-          type="submit"
-          action={() => addItem()}
-          classes="button__add"
-          content={
-            <img
-              src="../../../src/assets/icons/crud/add.png"
-              className="table__icon"
-              alt="add"
+        {editMode ? (
+          <>
+            <Button
+              type="submit"
+              action={() => {
+                saveItem();
+              }}
+              classes="button__save"
+              content={
+                <img
+                  src="../../../src/assets/icons/crud/save.png"
+                  className="table__icon"
+                  alt="save"
+                />
+              }
             />
-          }
-        />
+            <Button
+              action={() => resetInputs()}
+              classes="button__cancel"
+              content={
+                <img
+                  src="../../../src/assets/icons/crud/cancel.png"
+                  className="table__icon"
+                  alt="cancel"
+                />
+              }
+            />
+          </>
+        ) : (
+          <Button
+            type="submit"
+            action={() => addItem()}
+            classes="button__add"
+            content={
+              <img
+                src="../../../src/assets/icons/crud/add.png"
+                className="table__icon"
+                alt="add"
+              />
+            }
+          />
+        )}
       </form>
-      {!missingInputs ? (
+      {missingInputs ? (
         <p className="table__add-message">*All inputs are required.</p>
       ) : null}
     </div>
@@ -116,5 +190,18 @@ export const AddProduct = ({ nextID }) => {
 };
 
 Input.propTypes = {
-  nextID: PropTypes.number,
+  name: PropTypes.string,
+  price: PropTypes.string,
+  image: PropTypes.string,
+  recipeID: PropTypes.string,
+  active: PropTypes.bool,
+  setName: PropTypes.func,
+  setPrice: PropTypes.func,
+  setImage: PropTypes.func,
+  setRecipeID: PropTypes.func,
+  setActive: PropTypes.func,
+  editMode: PropTypes.bool,
+  setEditMode: PropTypes.func,
+  id: PropTypes.number,
+  setID: PropTypes.func,
 };

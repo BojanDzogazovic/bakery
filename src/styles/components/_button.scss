@@ -33,7 +33,9 @@
 
   &__edit,
   &__delete,
-  &__add {
+  &__add,
+  &__save,
+  &__cancel {
     background-color: transparent;
     cursor: pointer;
     outline: none;

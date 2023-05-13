@@ -1,5 +1,5 @@
-export const editData = async ({ url, id, ...data }) => {
-  const response = await fetch(`${url + id}`, {
+export const editData = async (url, { ...data }) => {
+  const response = await fetch(`${url}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

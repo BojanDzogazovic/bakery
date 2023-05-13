@@ -2,7 +2,16 @@ import PropTypes from "prop-types";
 
 import { Button } from "../shared/Button";
 
-export const Row = ({ data }) => {
+export const Row = ({
+  data,
+  setName,
+  setPrice,
+  setImage,
+  setRecipeID,
+  setActive,
+  setID,
+  setEditMode,
+}) => {
   const { id, name, price, image, recipe_id, active } = data;
 
   return (
@@ -21,6 +30,15 @@ export const Row = ({ data }) => {
       <td className="table__cell">{String(active)}</td>
       <td className="table__cell">
         <Button
+          action={() => {
+            setEditMode(true);
+            setID(id);
+            setName(name);
+            setPrice(price);
+            setImage(image);
+            setRecipeID(recipe_id);
+            setActive(active);
+          }}
           classes="button__edit"
           content={
             <img
@@ -47,4 +65,11 @@ export const Row = ({ data }) => {
 
 Row.propTypes = {
   data: PropTypes.object,
+  setName: PropTypes.func,
+  setPrice: PropTypes.func,
+  setImage: PropTypes.func,
+  setRecipeID: PropTypes.func,
+  setActive: PropTypes.func,
+  setID: PropTypes.func,
+  setEditMode: PropTypes.func,
 };
