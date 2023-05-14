@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
 
+import { useContext } from "react";
+
+import { ClientStateContext } from "../../ClientStateContext";
+
 import { Button } from "../shared/Button";
 
 export const Row = ({
@@ -13,6 +17,8 @@ export const Row = ({
   setEditMode,
 }) => {
   const { id, name, price, image, recipe_id, active } = data;
+
+  const { setGlobalClientState } = useContext(ClientStateContext);
 
   return (
     <tr className="table__row">
@@ -50,6 +56,13 @@ export const Row = ({
         />
         <Button
           classes="button__delete"
+          action={() => {
+            setGlobalClientState((prevState) => ({
+              ...prevState,
+              isModalActive: true,
+              deleteItemID: id,
+            }));
+          }}
           content={
             <img
               src="../../../src/assets/icons/crud/delete.png"

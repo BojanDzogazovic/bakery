@@ -1,8 +1,12 @@
+import { useState, useMemo } from "react";
 import { useNavigate, useOutlet, useLocation, Link } from "react-router-dom";
 
 import { useAuth } from "../hooks/auth/useAuth";
 
+import { ClientStateContext } from "../ClientStateContext";
+
 import { Button } from "./shared/Button";
+import { Modal } from "./shared/Modal";
 
 export const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -14,6 +18,15 @@ export const Dashboard = () => {
     navigate("/dashboard/recipes", { replace: true });
   }
 
+  const [globalClientState, setGlobalClientState] = useState({
+    isModalActive: false,
+    deleteItemID: 0,
+  });
+
+  const providerValue = useMemo(
+    () => ({ globalClientState, setGlobalClientState }),
+    [globalClientState, setGlobalClientState]
+  );
   return (
     <div className="dashboard">
       <nav className="navigation">
@@ -45,7 +58,48 @@ export const Dashboard = () => {
           action={() => logout()}
         />
       </nav>
-      {outlet}
+      <ClientStateContext.Provider value={providerValue}>
+        {outlet}
+        <Modal
+          content={
+            <>
+              <div className="modal__message">
+                <img
+                  src="../../../src/assets/icons/crud/error.png"
+                  className="error__icon"
+                  alt="Error"
+                />{" "}
+                <h2>Are you sure you want to delete this item?</h2>
+              </div>
+              <div className="modal__actions">
+                <Button
+                  classes="button modal__confirm"
+                  content="Confirm"
+                  action={() => {
+                    console.log(555);
+                    setGlobalClientState((prevState) => ({
+                      ...prevState,
+                      isModalActive: false,
+                      deleteItemID: 0,
+                    }));
+                  }}
+                />
+                <Button
+                  classes="button modal__cancel"
+                  content="Cancel"
+                  action={() => {
+                    setGlobalClientState((prevState) => ({
+                      ...prevState,
+                      isModalActive: false,
+                      deleteItemID: 0,
+                    }));
+                  }}
+                />
+              </div>
+            </>
+          }
+        />
+      </ClientStateContext.Provider>
     </div>
   );
 };
