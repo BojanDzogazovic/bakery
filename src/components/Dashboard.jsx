@@ -23,8 +23,9 @@ export const Dashboard = () => {
   }
 
   const [globalClientState, setGlobalClientState] = useState({
-    isModalActive: false,
+    updateItem: {},
     deleteItem: {},
+    isModalActive: false,
   });
 
   const providerValue = useMemo(

@@ -59,14 +59,17 @@ export const Login = () => {
       setPasswordMessage("");
       setIsValidPassword(true);
     }
+  };
 
+  useEffect(() => {
     if (isValidUsername && isValidPassword) {
       login({
         username: username,
         password: password,
       });
     }
-  };
+  }, [isValidUsername, isValidPassword]);
+
   return (
     <div className="login">
       <div className="login__wrapper">

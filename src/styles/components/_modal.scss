@@ -42,9 +42,6 @@
       height: 56px;
       width: 56px;
     }
-
-    &-message {
-    }
   }
 
   &__message {
@@ -52,6 +49,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
   }
 
   &__actions {
