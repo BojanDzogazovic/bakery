@@ -21,58 +21,69 @@ export const Row = ({
   const { setGlobalClientState } = useContext(ClientStateContext);
 
   return (
-    <tr className="table__row">
-      <td className="table__cell">{id}</td>
-      <td className="table__cell">{name}</td>
-      <td className="table__cell">{price}</td>
-      <td className="table__cell">
-        <img
-          src={`../../../src/assets/icons/products/${image}.png`}
-          alt={image}
-          className="table__icon"
-        />
-      </td>
-      <td className="table__cell">{recipe_id}</td>
-      <td className="table__cell">{String(active)}</td>
-      <td className="table__cell">
-        <Button
-          action={() => {
-            setEditMode(true);
-            setID(id);
-            setName(name);
-            setPrice(price);
-            setImage(image);
-            setRecipeID(recipe_id);
-            setActive(active);
-          }}
-          classes="button__edit"
-          content={
+    <>
+      {active ? (
+        <tr className="table__row">
+          <td className="table__cell">{id}</td>
+          <td className="table__cell">{name}</td>
+          <td className="table__cell">{price}</td>
+          <td className="table__cell">
             <img
-              src="../../../src/assets/icons/crud/edit.png"
+              src={`../../../src/assets/icons/products/${image}.png`}
+              alt={image}
               className="table__icon"
-              alt="edit"
             />
-          }
-        />
-        <Button
-          classes="button__delete"
-          action={() => {
-            setGlobalClientState((prevState) => ({
-              ...prevState,
-              isModalActive: true,
-              deleteItemID: id,
-            }));
-          }}
-          content={
-            <img
-              src="../../../src/assets/icons/crud/delete.png"
-              className="table__icon"
-              alt="delete"
+          </td>
+          <td className="table__cell">{recipe_id}</td>
+          <td className="table__cell">{String(active)}</td>
+          <td className="table__cell">
+            <Button
+              action={() => {
+                setEditMode(true);
+                setID(id);
+                setName(name);
+                setPrice(price);
+                setImage(image);
+                setRecipeID(recipe_id);
+                setActive(active);
+              }}
+              classes="button__edit"
+              content={
+                <img
+                  src="../../../src/assets/icons/crud/edit.png"
+                  className="table__icon"
+                  alt="edit"
+                />
+              }
             />
-          }
-        />
-      </td>
-    </tr>
+            <Button
+              classes="button__delete"
+              action={() => {
+                setGlobalClientState((prevState) => ({
+                  ...prevState,
+                  isModalActive: true,
+                  deleteItem: {
+                    name: name,
+                    price: price,
+                    image: image,
+                    recipe_id: recipe_id,
+                    active: false,
+                    id: id,
+                  },
+                }));
+              }}
+              content={
+                <img
+                  src="../../../src/assets/icons/crud/delete.png"
+                  className="table__icon"
+                  alt="delete"
+                />
+              }
+            />
+          </td>
+        </tr>
+      ) : null}
+    </>
   );
 };
 

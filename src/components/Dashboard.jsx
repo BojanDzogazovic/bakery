@@ -1,9 +1,13 @@
 import { useState, useMemo } from "react";
 import { useNavigate, useOutlet, useLocation, Link } from "react-router-dom";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { useAuth } from "../hooks/auth/useAuth";
 
 import { ClientStateContext } from "../ClientStateContext";
+
+import { editData } from "../actions/editData";
 
 import { Button } from "./shared/Button";
 import { Modal } from "./shared/Modal";
@@ -20,13 +24,24 @@ export const Dashboard = () => {
 
   const [globalClientState, setGlobalClientState] = useState({
     isModalActive: false,
-    deleteItemID: 0,
+    deleteItem: {},
   });
 
   const providerValue = useMemo(
     () => ({ globalClientState, setGlobalClientState }),
     [globalClientState, setGlobalClientState]
   );
+
+  const queryClient = useQueryClient();
+
+  const deleteProduct = useMutation({
+    mutationFn: (data) =>
+      editData(`${import.meta.env.VITE_BASE_URL}/products/${data.id}`, data),
+    onSuccess: (data) => {
+      queryClient.setQueryData(["products", data.id], data);
+      queryClient.invalidateQueries(["products"], { exact: true });
+    },
+  });
   return (
     <div className="dashboard">
       <nav className="navigation">
@@ -66,22 +81,24 @@ export const Dashboard = () => {
               <div className="modal__message">
                 <img
                   src="../../../src/assets/icons/crud/error.png"
-                  className="error__icon"
+                  className="error__icon modal__warning-icon"
                   alt="Error"
                 />{" "}
-                <h2>Are you sure you want to delete this item?</h2>
+                <h2 className="modal__warning-message">
+                  Are you sure you want to delete this item?
+                </h2>
               </div>
               <div className="modal__actions">
                 <Button
                   classes="button modal__confirm"
                   content="Confirm"
                   action={() => {
-                    console.log(555);
                     setGlobalClientState((prevState) => ({
                       ...prevState,
                       isModalActive: false,
-                      deleteItemID: 0,
+                      deleteItem: {},
                     }));
+                    deleteProduct.mutate({ ...globalClientState.deleteItem });
                   }}
                 />
                 <Button
@@ -91,7 +108,7 @@ export const Dashboard = () => {
                     setGlobalClientState((prevState) => ({
                       ...prevState,
                       isModalActive: false,
-                      deleteItemID: 0,
+                      deleteItem: {},
                     }));
                   }}
                 />

@@ -22,6 +22,51 @@
     -webkit-animation-duration: 0.4s;
     animation-name: slideIn;
     animation-duration: 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid $secondary_color;
+    border-radius: 5px;
+
+    @media (min-width: 700px) {
+      width: 550px;
+      left: 50%;
+      transform: translate(-50%);
+    }
+  }
+
+  &__warning {
+    &-icon {
+      height: 56px;
+      width: 56px;
+    }
+
+    &-message {
+    }
+  }
+
+  &__message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__actions {
+  }
+
+  &__cancel {
+    background-color: $info_color;
+    color: #fff;
+    border: 3px solid $info_color;
+  }
+
+  &__confirm {
+    background-color: #f44336;
+    color: #fff;
+    border: 3px solid #f44336;
   }
 
   @-webkit-keyframes slideIn {
