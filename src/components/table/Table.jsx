@@ -30,7 +30,6 @@ export const Table = ({
             <th className="table__cell table__cell--heading">Price</th>
             <th className="table__cell table__cell--heading">Image</th>
             <th className="table__cell table__cell--heading">Recipe ID</th>
-            <th className="table__cell table__cell--heading">Active</th>
             <th className="table__cell table__cell--heading">Actions</th>
           </tr>
         </thead>

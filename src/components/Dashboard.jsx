@@ -23,7 +23,6 @@ export const Dashboard = () => {
   }
 
   const [globalClientState, setGlobalClientState] = useState({
-    updateItem: {},
     deleteItem: {},
     isModalActive: false,
   });

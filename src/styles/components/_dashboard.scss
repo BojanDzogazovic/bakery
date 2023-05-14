@@ -4,6 +4,10 @@
   justify-content: center;
   flex-direction: column;
 
+  &__title {
+    text-align: center;
+  }
+
   &__content,
   &__content--products,
   &__content--recipes {

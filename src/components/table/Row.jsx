@@ -35,7 +35,6 @@ export const Row = ({
             />
           </td>
           <td className="table__cell">{recipe_id}</td>
-          <td className="table__cell">{String(active)}</td>
           <td className="table__cell">
             <Button
               action={() => {
