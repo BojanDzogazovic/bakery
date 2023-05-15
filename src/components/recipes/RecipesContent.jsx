@@ -6,14 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import { Table } from "../table/Table";
 import { Error } from "../shared/Error";
 import { Loader } from "../shared/loader";
-//import { AddProduct } from "./AddProduct";
+import { AddRecipe } from "./AddRecipe";
 
 export const RecipesContent = () => {
   const [recipeIsInEditMode, setRecipeIsInEditMode] = useState(false);
 
   const [recipeID, setRecipeID] = useState(0);
   const [recipeRawMaterial, setRecipeRawMaterial] = useState("");
-  const [recipeRawMaterialID, setRecipeRawMaterialID] = useState(0);
+  const [recipeRawMaterialID, setRecipeRawMaterialID] = useState("");
   const [recipeRawMaterialQuantity, setRecipeRawMaterialQuantity] =
     useState("");
   const [recipeRawMaterialUnit, setRecipeRawMaterialUnit] = useState("");
@@ -35,22 +35,23 @@ export const RecipesContent = () => {
         <Error />
       ) : (
         <>
-          {/*  <AddProduct
-            recipeName={recipeName}
-            recipePrice={recipePrice}
-            recipeImage={recipeImage}
-            recipeRecipeID={recipeRecipeID}
-            recipeIsActive={recipeIsActive}
-            setProductName={setProductName}
-            setProductPrice={setProductPrice}
-            setProductImage={setProductImage}
-            setProductRecipeID={setProductRecipeID}
-            setProductIsActive={setProductIsActive}
-            recipeIsInEditMode={recipeIsInEditMode}
-            setProductIsInEditMode={setProductIsInEditMode}
-            recipeID={recipeID}
-            setProductID={setProductID}
-          /> */}
+          {
+            <AddRecipe
+              recipeID={recipeID}
+              recipeRawMaterial={recipeRawMaterial}
+              recipeRawMaterialID={recipeRawMaterialID}
+              recipeRawMaterialQuantity={recipeRawMaterialQuantity}
+              recipeRawMaterialUnit={recipeRawMaterialUnit}
+              recipeIsActive={recipeIsActive}
+              recipeIsInEditMode={recipeIsInEditMode}
+              setRecipeRawMaterial={setRecipeRawMaterial}
+              setRecipeRawMaterialID={setRecipeRawMaterialID}
+              setRecipeRawMaterialQuantity={setRecipeRawMaterialQuantity}
+              setRecipeRawMaterialUnit={setRecipeRawMaterialUnit}
+              setRecipeIsActive={setRecipeIsActive}
+              setRecipeIsInEditMode={setRecipeIsInEditMode}
+            />
+          }
           <Table
             content="recipes"
             setRecipeRawMaterial={setRecipeRawMaterial}

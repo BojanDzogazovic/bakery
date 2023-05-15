@@ -23,7 +23,8 @@ export const Dashboard = () => {
   }
 
   const [globalClientState, setGlobalClientState] = useState({
-    deleteItem: {},
+    deleteProductItem: {},
+    deleteRecipeItem: {},
     isModalActive: false,
     currentModalAction: "",
   });
@@ -55,10 +56,10 @@ export const Dashboard = () => {
 
   const modalActionsMap = {
     deleteProduct: () => {
-      deleteProduct.mutate({ ...globalClientState.deleteItem });
+      deleteProduct.mutate({ ...globalClientState.deleteProductItem });
     },
     deleteRecipe: () => {
-      deleteRecipe.mutate({ ...globalClientState.deleteItem });
+      deleteRecipe.mutate({ ...globalClientState.deleteRecipeItem });
     },
   };
   return (
@@ -116,7 +117,8 @@ export const Dashboard = () => {
                       ...prevState,
                       isModalActive: false,
                       currentModalAction: "",
-                      deleteItem: {},
+                      deleteProductItem: {},
+                      deleteRecipeItem: {},
                     }));
                     modalActionsMap[globalClientState.currentModalAction]();
                   }}
@@ -128,7 +130,8 @@ export const Dashboard = () => {
                     setGlobalClientState((prevState) => ({
                       ...prevState,
                       isModalActive: false,
-                      deleteItem: {},
+                      deleteProductItem: {},
+                      deleteRecipeItem: {},
                     }));
                   }}
                 />

@@ -69,7 +69,7 @@ export const Row = ({
                     ...prevState,
                     isModalActive: true,
                     currentModalAction: "deleteProduct",
-                    deleteItem: {
+                    deleteProductItem: {
                       name: data.name,
                       price: data.price,
                       image: data.image,
@@ -126,19 +126,19 @@ export const Row = ({
               <Button
                 classes="button__delete"
                 action={() => {
-                  /* setGlobalClientState((prevState) => ({
+                  setGlobalClientState((prevState) => ({
                     ...prevState,
                     isModalActive: true,
-                    currentModalAction: "deleteProduct",
-                    deleteItem: {
-                      name: data.name,
-                      price: data.price,
-                      image: data.image,
-                      recipe_id: data.recipe_id,
+                    currentModalAction: "deleteRecipe",
+                    deleteRecipeItem: {
+                      raw_material_id: data.raw_material_id,
+                      raw_material: data.raw_material,
+                      quantity: data.quantity,
+                      unit: data.unit,
                       active: false,
                       id: data.id,
                     },
-                  })); */
+                  }));
                 }}
                 content={
                   <img

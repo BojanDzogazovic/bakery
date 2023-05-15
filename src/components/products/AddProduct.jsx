@@ -15,7 +15,6 @@ export const AddProduct = ({
   productRecipeID,
   productIsActive,
   productID,
-  setProductID,
   setProductName,
   setProductPrice,
   setProductImage,
@@ -183,5 +182,4 @@ Input.propTypes = {
   productIsInEditMode: PropTypes.bool,
   setProductIsInEditMode: PropTypes.func,
   productID: PropTypes.number,
-  setProductID: PropTypes.func,
 };
