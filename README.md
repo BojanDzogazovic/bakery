@@ -25,6 +25,6 @@ Task overview/notes:
 - for styles and design I went with custom SCSS and improvised a layout,
 - for images I went with a collection of icons, and I have put in 3 additional icons, in addition to 10 you see initially, there are (meat, cheese, jam), so in field imageURL just put those words to get proper icon rendered,
 - for versioning I of corse used git, and you can track progress there, if needed,
-- for deployment, I used Github pages
+- for deployment, I used Netlify
 
 If you experience any difficulties with using/logging/operations on tack, or have any additional questions, please feel free to reach out.
