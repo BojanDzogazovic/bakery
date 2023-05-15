@@ -161,6 +161,7 @@ export const Row = ({
 };
 
 Row.propTypes = {
+  content: PropTypes.string,
   data: PropTypes.object,
   setProductName: PropTypes.func,
   setProductPrice: PropTypes.func,

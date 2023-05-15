@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { ClientStateContext } from "../../ClientStateContext";
 
 export const Modal = ({ content }) => {
-  const { globalClientState, setGlobalClientState } =
+  const { globalClientState } =
     useContext(ClientStateContext);
 
   return ReactDOM.createPortal(
