@@ -9,22 +9,22 @@ import { Loader } from "../shared/loader";
 import { AddProduct } from "./AddProduct";
 
 export const ProductsContent = () => {
-  const [editMode, setEditMode] = useState(false);
+  const [productIsInEditMode, setProductIsInEditMode] = useState(false);
 
-  const [id, setID] = useState(0);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [recipeID, setRecipeID] = useState("");
-  const [active, setActive] = useState(true);
+  const [productID, setProductID] = useState(0);
+  const [productName, setProductName] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productImage, setProductImage] = useState("");
+  const [productRecipeID, setProductRecipeID] = useState("");
+  const [productIsActive, setProductIsActive] = useState(true);
 
   const { data, isLoading, isError } = useQuery(["products"], () =>
     fetchData(`${import.meta.env.VITE_BASE_URL}/products`)
   );
 
   useEffect(() => {
-    if (!editMode && data) setID(data.length + 1);
-  }, [editMode, data]);
+    if (!productIsInEditMode && data) setProductID(data.length + 1);
+  }, [productIsInEditMode, data]);
 
   return (
     <div className="dashboard__content--products">
@@ -35,29 +35,30 @@ export const ProductsContent = () => {
       ) : (
         <>
           <AddProduct
-            name={name}
-            price={price}
-            image={image}
-            recipeID={recipeID}
-            active={active}
-            setName={setName}
-            setPrice={setPrice}
-            setImage={setImage}
-            setRecipeID={setRecipeID}
-            setActive={setActive}
-            editMode={editMode}
-            setEditMode={setEditMode}
-            id={id}
-            setID={setID}
+            productName={productName}
+            productPrice={productPrice}
+            productImage={productImage}
+            productRecipeID={productRecipeID}
+            productIsActive={productIsActive}
+            setProductName={setProductName}
+            setProductPrice={setProductPrice}
+            setProductImage={setProductImage}
+            setProductRecipeID={setProductRecipeID}
+            setProductIsActive={setProductIsActive}
+            productIsInEditMode={productIsInEditMode}
+            setProductIsInEditMode={setProductIsInEditMode}
+            productID={productID}
+            setProductID={setProductID}
           />
           <Table
-            setName={setName}
-            setPrice={setPrice}
-            setImage={setImage}
-            setRecipeID={setRecipeID}
-            setActive={setActive}
-            setID={setID}
-            setEditMode={setEditMode}
+            setProductName={setProductName}
+            setProductPrice={setProductPrice}
+            setProductImage={setProductImage}
+            setProductRecipeID={setProductRecipeID}
+            setProductIsActive={setProductIsActive}
+            setProductID={setProductID}
+            setProductIsInEditMode={setProductIsInEditMode}
+            productIsInEditMode={productIsInEditMode}
             classes="table table--products"
             data={data.sort((a, b) =>
               a.name.toLowerCase().localeCompare(b.name.toLowerCase())

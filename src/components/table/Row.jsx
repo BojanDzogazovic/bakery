@@ -8,13 +8,13 @@ import { Button } from "../shared/Button";
 
 export const Row = ({
   data,
-  setName,
-  setPrice,
-  setImage,
-  setRecipeID,
-  setActive,
-  setID,
-  setEditMode,
+  setProductName,
+  setProductPrice,
+  setProductImage,
+  setProductRecipeID,
+  setProductIsActive,
+  setProductID,
+  setProductIsInEditMode,
 }) => {
   const { id, name, price, image, recipe_id, active } = data;
 
@@ -38,13 +38,13 @@ export const Row = ({
           <td className="table__cell">
             <Button
               action={() => {
-                setEditMode(true);
-                setID(id);
-                setName(name);
-                setPrice(price);
-                setImage(image);
-                setRecipeID(recipe_id);
-                setActive(active);
+                setProductIsInEditMode(true);
+                setProductID(id);
+                setProductName(name);
+                setProductPrice(price);
+                setProductImage(image);
+                setProductRecipeID(recipe_id);
+                setProductIsActive(active);
               }}
               classes="button__edit"
               content={
@@ -61,6 +61,7 @@ export const Row = ({
                 setGlobalClientState((prevState) => ({
                   ...prevState,
                   isModalActive: true,
+                  currentModalAction: "deleteProduct",
                   deleteItem: {
                     name: name,
                     price: price,
@@ -88,11 +89,11 @@ export const Row = ({
 
 Row.propTypes = {
   data: PropTypes.object,
-  setName: PropTypes.func,
-  setPrice: PropTypes.func,
-  setImage: PropTypes.func,
-  setRecipeID: PropTypes.func,
-  setActive: PropTypes.func,
-  setID: PropTypes.func,
-  setEditMode: PropTypes.func,
+  setProductName: PropTypes.func,
+  setProductPrice: PropTypes.func,
+  setProductImage: PropTypes.func,
+  setProductRecipeID: PropTypes.func,
+  setProductIsActive: PropTypes.func,
+  setProductID: PropTypes.func,
+  setProductIsInEditMode: PropTypes.func,
 };

@@ -4,13 +4,13 @@ import { Row } from "./Row";
 export const Table = ({
   classes,
   data,
-  setName,
-  setPrice,
-  setImage,
-  setRecipeID,
-  setActive,
-  setID,
-  setEditMode,
+  setProductName,
+  setProductPrice,
+  setProductImage,
+  setProductRecipeID,
+  setProductIsActive,
+  setProductID,
+  setProductIsInEditMode,
 }) => {
   return (
     <div style={{ overflowX: "auto" }}>
@@ -38,13 +38,13 @@ export const Table = ({
             <Row
               key={d.id}
               data={d}
-              setName={setName}
-              setPrice={setPrice}
-              setImage={setImage}
-              setRecipeID={setRecipeID}
-              setActive={setActive}
-              setID={setID}
-              setEditMode={setEditMode}
+              setProductName={setProductName}
+              setProductPrice={setProductPrice}
+              setProductImage={setProductImage}
+              setProductRecipeID={setProductRecipeID}
+              setProductIsActive={setProductIsActive}
+              setProductID={setProductID}
+              setProductIsInEditMode={setProductIsInEditMode}
             />
           ))}
         </tbody>
@@ -56,11 +56,11 @@ export const Table = ({
 Table.propTypes = {
   classes: PropTypes.string,
   data: PropTypes.array,
-  setName: PropTypes.func,
-  setPrice: PropTypes.func,
-  setImage: PropTypes.func,
-  setRecipeID: PropTypes.func,
-  setActive: PropTypes.func,
-  setID: PropTypes.func,
-  setEditMode: PropTypes.func,
+  setProductName: PropTypes.func,
+  setProductPrice: PropTypes.func,
+  setProductImage: PropTypes.func,
+  setProductRecipeID: PropTypes.func,
+  setProductIsActive: PropTypes.func,
+  setProductID: PropTypes.func,
+  setProductIsInEditMode: PropTypes.func,
 };

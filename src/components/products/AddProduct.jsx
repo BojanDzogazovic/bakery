@@ -9,20 +9,20 @@ import { Input } from "../form/Input";
 import { Button } from "../shared/Button";
 
 export const AddProduct = ({
-  name,
-  price,
-  image,
-  recipeID,
-  active,
-  id,
-  setID,
-  setName,
-  setPrice,
-  setImage,
-  setRecipeID,
-  setActive,
-  editMode,
-  setEditMode,
+  productName,
+  productPrice,
+  productImage,
+  productRecipeID,
+  productIsActive,
+  productID,
+  setProductID,
+  setProductName,
+  setProductPrice,
+  setProductImage,
+  setProductRecipeID,
+  setProductIsActive,
+  productIsInEditMode,
+  setProductIsInEditMode,
 }) => {
   const queryClient = useQueryClient();
 
@@ -37,64 +37,42 @@ export const AddProduct = ({
 
   const editProduct = useMutation({
     mutationFn: (data) =>
-      editData(`${import.meta.env.VITE_BASE_URL}/products/${id}`, data),
+      editData(`${import.meta.env.VITE_BASE_URL}/products/${productID}`, data),
     onSuccess: (data) => {
-      queryClient.setQueryData(["products", id], data);
+      queryClient.setQueryData(["products", productID], data);
       queryClient.invalidateQueries(["products"], { exact: true });
     },
   });
 
   const [missingInputs, setMissingInputs] = useState(false);
 
-  const addItem = async () => {
-    if (!name || !price || !image || !recipeID) {
+  const saveProductItem = async (action) => {
+    if (!productName || !productPrice || !productImage || !productRecipeID) {
       setMissingInputs(true);
 
       setTimeout(() => {
         setMissingInputs(false);
       }, 3000);
     } else {
-      const newProduct = {
-        name: name,
-        price: price,
-        image: image,
-        recipe_id: recipeID,
-        active: active,
-        id: id,
-      };
-      addProduct.mutate({ ...newProduct });
-      resetInputs();
-    }
-  };
-
-  const saveItem = async () => {
-    if (!name || !price || !image || !recipeID) {
-      setMissingInputs(true);
-
-      setTimeout(() => {
-        setMissingInputs(false);
-      }, 3000);
-    } else {
-      const newProduct = {
-        name: name,
-        price: price,
-        image: image,
-        recipe_id: recipeID,
-        active: active,
-        id: id,
-      };
-      editProduct.mutate({ ...newProduct });
+      action.mutate({
+        name: productName,
+        price: productPrice,
+        image: productImage,
+        recipe_id: productRecipeID,
+        active: productIsActive,
+        id: productID,
+      });
       resetInputs();
     }
   };
 
   const resetInputs = () => {
-    setEditMode(false);
-    setName("");
-    setPrice("");
-    setImage("");
-    setRecipeID("");
-    setActive(true);
+    setProductIsInEditMode(false);
+    setProductName("");
+    setProductPrice("");
+    setProductImage("");
+    setProductRecipeID("");
+    setProductIsActive(true);
   };
 
   return (
@@ -106,45 +84,47 @@ export const AddProduct = ({
         }}
         className="table__wrapper"
       >
-        <Input readonly value={id} classes="table__add-input" />
+        <Input readonly value={productID} classes="table__add-input" />
         <Input
-          value={name}
-          setValue={setName}
+          value={productName}
+          setValue={setProductName}
           placeholder="Name...*"
           classes="table__add-input"
         />
         <Input
-          value={price}
-          setValue={setPrice}
+          value={productPrice}
+          setValue={setProductPrice}
           placeholder="Price...*"
           classes="table__add-input"
         />
         <Input
-          value={image}
-          setValue={setImage}
+          value={productImage}
+          setValue={setProductImage}
           placeholder="Image URL...*"
           classes="table__add-input"
         />
         <Input
-          value={recipeID}
-          setValue={setRecipeID}
+          value={productRecipeID}
+          setValue={setProductRecipeID}
           placeholder="Recipe ID...*"
           classes="table__add-input"
         />
         <select
           className="input__select table__add-select"
-          value={active}
-          onChange={(e) => setActive(e.target.value)}
+          value={productIsActive}
+          onChange={(e) => {
+            setProductIsActive(JSON.parse(e.target.value));
+          }}
         >
           <option value={true}>Active</option>
           <option value={false}>Inactive</option>
         </select>
-        {editMode ? (
+        {productIsInEditMode ? (
           <>
             <Button
               type="submit"
               action={() => {
-                saveItem();
+                saveProductItem(editProduct);
               }}
               classes="button__save"
               content={
@@ -170,7 +150,7 @@ export const AddProduct = ({
         ) : (
           <Button
             type="submit"
-            action={() => addItem()}
+            action={() => saveProductItem(addProduct)}
             classes="button__add"
             content={
               <img
@@ -190,18 +170,18 @@ export const AddProduct = ({
 };
 
 Input.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.string,
-  image: PropTypes.string,
-  recipeID: PropTypes.string,
-  active: PropTypes.bool,
-  setName: PropTypes.func,
-  setPrice: PropTypes.func,
-  setImage: PropTypes.func,
-  setRecipeID: PropTypes.func,
-  setActive: PropTypes.func,
-  editMode: PropTypes.bool,
-  setEditMode: PropTypes.func,
-  id: PropTypes.number,
-  setID: PropTypes.func,
+  productName: PropTypes.string,
+  productPrice: PropTypes.string,
+  productImage: PropTypes.string,
+  productRecipeID: PropTypes.string,
+  productIsActive: PropTypes.bool,
+  setProductName: PropTypes.func,
+  setProductPrice: PropTypes.func,
+  setProductImage: PropTypes.func,
+  setProductRecipeID: PropTypes.func,
+  setProductIsActive: PropTypes.func,
+  productIsInEditMode: PropTypes.bool,
+  setProductIsInEditMode: PropTypes.func,
+  productID: PropTypes.number,
+  setProductID: PropTypes.func,
 };

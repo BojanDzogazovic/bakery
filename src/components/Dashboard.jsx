@@ -25,6 +25,7 @@ export const Dashboard = () => {
   const [globalClientState, setGlobalClientState] = useState({
     deleteItem: {},
     isModalActive: false,
+    currentModalAction: "",
   });
 
   const providerValue = useMemo(
@@ -42,6 +43,24 @@ export const Dashboard = () => {
       queryClient.invalidateQueries(["products"], { exact: true });
     },
   });
+
+  const deleteRecipe = useMutation({
+    mutationFn: (data) =>
+      editData(`${import.meta.env.VITE_BASE_URL}/recipes/${data.id}`, data),
+    onSuccess: (data) => {
+      queryClient.setQueryData(["recipes", data.id], data);
+      queryClient.invalidateQueries(["recipes"], { exact: true });
+    },
+  });
+
+  const modalActionsMap = {
+    deleteProduct: () => {
+      deleteProduct.mutate({ ...globalClientState.deleteItem });
+    },
+    deleteRecipe: () => {
+      deleteRecipe.mutate({ ...globalClientState.deleteItem });
+    },
+  };
   return (
     <div className="dashboard">
       <nav className="navigation">
@@ -96,9 +115,10 @@ export const Dashboard = () => {
                     setGlobalClientState((prevState) => ({
                       ...prevState,
                       isModalActive: false,
+                      currentModalAction: "",
                       deleteItem: {},
                     }));
-                    deleteProduct.mutate({ ...globalClientState.deleteItem });
+                    modalActionsMap[globalClientState.currentModalAction]();
                   }}
                 />
                 <Button
