@@ -24,7 +24,6 @@ Task overview/notes:
 - for CRUD operations, data fetching, server state and data caching I utilized React Query
 - for styles and design I went with custom SCSS and improvised a layout,
 - for images I went with a collection of icons, and I have put in 3 additional icons, in addition to 10 you see initially, there are (meat, cheese, jam), so in field imageURL just put those words to get proper icon rendered,
-- for versioning I of corse used git, and you can track progress there, if needed,
-- for deployment, I used Netlify
+- I did want to deploy it to production, initially on Github pages, that I use frequently, but I had some issue with vite rollup on deployment, after that I tried with Netlify, but I had same rollup deployment issues there, and after I spent ~2 hours on trying to deploy it without success, I gave up, since I had no more free time.
 
-If you experience any difficulties with using/logging/operations on tack, or have any additional questions, please feel free to reach out.
+If you experience any difficulties with using/logging/operations on local instance of task, or have any additional questions, please feel free to reach out, since it works fine on my local machine.
