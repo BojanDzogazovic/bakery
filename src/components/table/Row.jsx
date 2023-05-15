@@ -7,6 +7,7 @@ import { ClientStateContext } from "../../ClientStateContext";
 import { Button } from "../shared/Button";
 
 export const Row = ({
+  content,
   data,
   setProductName,
   setProductPrice,
@@ -15,74 +16,146 @@ export const Row = ({
   setProductIsActive,
   setProductID,
   setProductIsInEditMode,
+  setRecipeRawMaterial,
+  setRecipeRawMaterialID,
+  setRecipeRawMaterialQuantity,
+  setRecipeRawMaterialUnit,
+  setRecipeIsActive,
+  setRecipeID,
+  setRecipeIsInEditMode,
 }) => {
-  const { id, name, price, image, recipe_id, active } = data;
-
   const { setGlobalClientState } = useContext(ClientStateContext);
 
   return (
     <>
-      {active ? (
-        <tr className="table__row">
-          <td className="table__cell">{id}</td>
-          <td className="table__cell">{name}</td>
-          <td className="table__cell">{price}</td>
-          <td className="table__cell">
-            <img
-              src={`../../../src/assets/icons/products/${image}.png`}
-              alt={image}
-              className="table__icon"
-            />
-          </td>
-          <td className="table__cell">{recipe_id}</td>
-          <td className="table__cell">
-            <Button
-              action={() => {
-                setProductIsInEditMode(true);
-                setProductID(id);
-                setProductName(name);
-                setProductPrice(price);
-                setProductImage(image);
-                setProductRecipeID(recipe_id);
-                setProductIsActive(active);
-              }}
-              classes="button__edit"
-              content={
-                <img
-                  src="../../../src/assets/icons/crud/edit.png"
-                  className="table__icon"
-                  alt="edit"
-                />
-              }
-            />
-            <Button
-              classes="button__delete"
-              action={() => {
-                setGlobalClientState((prevState) => ({
-                  ...prevState,
-                  isModalActive: true,
-                  currentModalAction: "deleteProduct",
-                  deleteItem: {
-                    name: name,
-                    price: price,
-                    image: image,
-                    recipe_id: recipe_id,
-                    active: false,
-                    id: id,
-                  },
-                }));
-              }}
-              content={
-                <img
-                  src="../../../src/assets/icons/crud/delete.png"
-                  className="table__icon"
-                  alt="delete"
-                />
-              }
-            />
-          </td>
-        </tr>
-      ) : null}
+      {content == "products" ? (
+        data.active ? (
+          <tr className="table__row">
+            <td className="table__cell">{data.id}</td>
+            <td className="table__cell">{data.name}</td>
+            <td className="table__cell">{data.price}</td>
+            <td className="table__cell">
+              <img
+                src={`../../../src/assets/icons/products/${data.image}.png`}
+                alt={data.image}
+                className="table__icon"
+              />
+            </td>
+            <td className="table__cell">{data.recipe_id}</td>
+            <td className="table__cell">
+              <Button
+                action={() => {
+                  setProductIsInEditMode(true);
+                  setProductID(data.id);
+                  setProductName(data.name);
+                  setProductPrice(data.price);
+                  setProductImage(data.image);
+                  setProductRecipeID(data.recipe_id);
+                  setProductIsActive(data.active);
+                }}
+                classes="button__edit"
+                content={
+                  <img
+                    src="../../../src/assets/icons/crud/edit.png"
+                    className="table__icon"
+                    alt="edit"
+                  />
+                }
+              />
+              <Button
+                classes="button__delete"
+                action={() => {
+                  setGlobalClientState((prevState) => ({
+                    ...prevState,
+                    isModalActive: true,
+                    currentModalAction: "deleteProduct",
+                    deleteItem: {
+                      name: data.name,
+                      price: data.price,
+                      image: data.image,
+                      recipe_id: data.recipe_id,
+                      active: false,
+                      id: data.id,
+                    },
+                  }));
+                }}
+                content={
+                  <img
+                    src="../../../src/assets/icons/crud/delete.png"
+                    className="table__icon"
+                    alt="delete"
+                  />
+                }
+              />
+            </td>
+          </tr>
+        ) : (
+          <></>
+        )
+      ) : (
+        <></>
+      )}
+      {content == "recipes" ? (
+        data.active ? (
+          <tr className="table__row">
+            <td className="table__cell">{data.id}</td>
+            <td className="table__cell">{data.raw_material_id}</td>
+            <td className="table__cell">{data.raw_material}</td>
+            <td className="table__cell">{data.quantity}</td>
+            <td className="table__cell">{data.unit}</td>
+            <td className="table__cell">
+              <Button
+                action={() => {
+                  setRecipeRawMaterial(data.raw_material),
+                    setRecipeRawMaterialID(data.raw_material_id),
+                    setRecipeRawMaterialQuantity(data.quantity),
+                    setRecipeRawMaterialUnit(data.unit),
+                    setRecipeIsActive(data.active),
+                    setRecipeID(data.id),
+                    setRecipeIsInEditMode(true);
+                }}
+                classes="button__edit"
+                content={
+                  <img
+                    src="../../../src/assets/icons/crud/edit.png"
+                    className="table__icon"
+                    alt="edit"
+                  />
+                }
+              />
+              <Button
+                classes="button__delete"
+                action={() => {
+                  /* setGlobalClientState((prevState) => ({
+                    ...prevState,
+                    isModalActive: true,
+                    currentModalAction: "deleteProduct",
+                    deleteItem: {
+                      name: data.name,
+                      price: data.price,
+                      image: data.image,
+                      recipe_id: data.recipe_id,
+                      active: false,
+                      id: data.id,
+                    },
+                  })); */
+                }}
+                content={
+                  <img
+                    src="../../../src/assets/icons/crud/delete.png"
+                    className="table__icon"
+                    alt="delete"
+                  />
+                }
+              />
+            </td>
+          </tr>
+        ) : (
+          <></>
+        )
+      ) : (
+        <></>
+      )}
     </>
   );
 };
@@ -96,4 +169,11 @@ Row.propTypes = {
   setProductIsActive: PropTypes.func,
   setProductID: PropTypes.func,
   setProductIsInEditMode: PropTypes.func,
+  setRecipeRawMaterial: PropTypes.func,
+  setRecipeRawMaterialID: PropTypes.func,
+  setRecipeRawMaterialQuantity: PropTypes.func,
+  setRecipeRawMaterialUnit: PropTypes.func,
+  setRecipeIsActive: PropTypes.func,
+  setRecipeID: PropTypes.func,
+  setRecipeIsInEditMode: PropTypes.func,
 };

@@ -51,6 +51,7 @@ export const ProductsContent = () => {
             setProductID={setProductID}
           />
           <Table
+            content="products"
             setProductName={setProductName}
             setProductPrice={setProductPrice}
             setProductImage={setProductImage}
@@ -58,9 +59,8 @@ export const ProductsContent = () => {
             setProductIsActive={setProductIsActive}
             setProductID={setProductID}
             setProductIsInEditMode={setProductIsInEditMode}
-            productIsInEditMode={productIsInEditMode}
             classes="table table--products"
-            data={data.sort((a, b) =>
+            data={data?.sort((a, b) =>
               a.name.toLowerCase().localeCompare(b.name.toLowerCase())
             )}
           />
