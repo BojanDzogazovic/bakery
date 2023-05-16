@@ -6,7 +6,8 @@ I believe that I have completed ~90% of task requirements, and if I had more tim
 
 - utilize context api in greater measure and avoid few instances of "mild" prop drilling,
 - extrapolate some functions and components and make them a bit more flexible, reusable, and in term with DRY,
-- maybe implement JWT usage on login...
+- exted HOC usage on some recipe/products components
+- maybe implement JWT usage on login, refactor it a bit...
 
 but as I said, due to lack of free time, I went with idea to create "MVP" first, and cover as much of functionalities, and later refactor where improvements are possible, but I did not have enough time for that.
 
